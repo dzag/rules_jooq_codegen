@@ -6,8 +6,16 @@ load("@rules_java//java:defs.bzl", "java_binary", "java_library")
 
 def _get_var(_cxt, attr_name):
     attr_value = getattr(_cxt.attr, attr_name)
-    result = _cxt.var.get(attr_value)
-    return result if result != None else attr_value
+
+    is_start_bracket = attr_value[:1] == "{"
+    is_end_bracket = attr_name[-1:] == "}"
+
+    if is_start_bracket and is_end_bracket: # It's a replace-able value
+        real_value = attr_value[1:-1]
+        result = _cxt.var.get(real_value) # _ctx.var is a map has been passed with --define params
+        return result if result != None else attr_value
+
+    return attr_value
 
 def _impl(ctx):
     file = ctx.actions.declare_file(ctx.attr.name + ".srcjar")
