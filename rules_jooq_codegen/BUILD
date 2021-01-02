@@ -7,6 +7,8 @@ exports_files([
     "jooq_codegen.bzl",
 ])
 
+package(default_visibility = ["//visibility:public"])
+
 java_library(
     name = "codegen",
     srcs = glob(["src/**/*.java"]),
