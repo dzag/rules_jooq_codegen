@@ -10,9 +10,9 @@ def _get_var(_cxt, attr_name):
     is_start_bracket = attr_value[:1] == "{"
     is_end_bracket = attr_name[-1:] == "}"
 
-    if is_start_bracket and is_end_bracket: # It's a replace-able value
+    if is_start_bracket and is_end_bracket:  # It's a replace-able value
         real_value = attr_value[1:-1]
-        result = _cxt.var.get(real_value) # _ctx.var is a map has been passed with --define params
+        result = _cxt.var.get(real_value)  # _ctx.var is a map has been passed with --define params
         return result if result != None else attr_value
 
     return attr_value
@@ -55,8 +55,6 @@ jooq_gensrcs = rule(
 )
 
 def jooq_srcs(
-        name,
-        visibility,
         codegen_xml,
         url,
         user,
@@ -64,12 +62,15 @@ def jooq_srcs(
         jooq_dep = "@maven//:org_jooq_jooq",
         jooq_meta_dep = "@maven//:org_jooq_jooq_meta",
         **kwargs):
+    name = kwargs["name"]
+    visibility = kwargs["visibility"]
+
     java_binary(
         name = name + "_codegen",
         main_class = "com.trerry.jooqcodegen.JooqCodegen",
         visibility = ["//visibility:public"],
         runtime_deps = [
-            "@rules_jooq_codegen//rules_jooq_codegen:codegen",
+            "@rules_jooq_codegen//codegen:codegen",
         ],
     )
 

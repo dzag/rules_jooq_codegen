@@ -5,10 +5,6 @@ load("@rules_java//java:defs.bzl", "java_library")
 
 package(default_visibility = ["//visibility:public"])
 
-exports_files([
-    "jooq_codegen.bzl",
-])
-
 java_library(
     name = "codegen",
     srcs = glob(["src/**/*.java"]),
@@ -16,9 +12,9 @@ java_library(
     runtime_deps = [
     ],
     deps = [
-        "@jooq_codegen_maven//:org_jooq_jooq",
-        "@jooq_codegen_maven//:org_jooq_jooq_codegen",
-        "@jooq_codegen_maven//:org_jooq_jooq_meta",
-        "@jooq_codegen_maven//:mysql_mysql_connector_java",
+        "@maven//:mysql_mysql_connector_java",
+        "@maven//:org_jooq_jooq",
+        "@maven//:org_jooq_jooq_codegen",
+        "@maven//:org_jooq_jooq_meta",
     ],
 )
