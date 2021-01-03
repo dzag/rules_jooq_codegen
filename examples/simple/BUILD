@@ -9,5 +9,21 @@ java_binary(
         "@maven//:mysql_mysql_connector_java",
         "@maven//:org_jooq_jooq",
         "@maven//:org_jooq_jooq_meta",
+        "@maven//:org_liquibase_liquibase_core",
+        "@maven//:org_testcontainers_jdbc",
+        "@maven//:org_testcontainers_mysql",
+        "@maven//:org_testcontainers_testcontainers",
     ],
+)
+
+filegroup(
+    name = "changelog",
+    srcs = glob(["migration/changelog/**"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "master",
+    srcs = ["migration/db.changelog-master.xml"],
+    visibility = ["//visibility:public"],
 )

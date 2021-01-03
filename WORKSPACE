@@ -24,6 +24,9 @@ jooq_codegen_maven_install(
         "org.jooq:jooq-meta:%s" % JOOQ_VERSION,
         "org.jooq:jooq-codegen:%s" % JOOQ_VERSION,
         "mysql:mysql-connector-java:8.0.22",
+        "org.testcontainers:testcontainers:1.15.1",
+        "org.testcontainers:mysql:1.15.1",
+        "org.liquibase:liquibase-core:4.2.2",
     ],
     fetch_sources = True,
     repositories = [

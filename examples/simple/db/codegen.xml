@@ -4,9 +4,9 @@
     <generator>
         <database>
             <name>org.jooq.meta.mysql.MySQLDatabase</name>
-            <inputSchema>your_schema_name</inputSchema>
+            <inputSchema>trerry</inputSchema>
             <includes>.*</includes>
-            <excludes></excludes>
+            <excludes>DATABASECHANGELOG|DATABASECHANGELOGLOCK</excludes>
         </database>
 
         <generate>
