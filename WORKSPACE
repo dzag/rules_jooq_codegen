@@ -2,34 +2,29 @@ workspace(name = "rules_jooq_codegen")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-RULES_JVM_EXTERNAL_TAG = "3.3"
-
-RULES_JVM_EXTERNAL_SHA = "d85951a92c0908c80bd8551002d66cb23c3434409c814179c0ff026b53544dab"
-
 http_archive(
-    name = "rules_jvm_external",
-    sha256 = RULES_JVM_EXTERNAL_SHA,
-    strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
-    url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
+    name = "remote_java_tools_linux",
+    sha256 = "085c0ba53ba764e81d4c195524f3c596085cbf9cdc01dd8e6d2ae677e726af35",
+    urls = [
+        "https://mirror.bazel.build/bazel_java_tools/releases/javac11/v10.6/java_tools_javac11_linux-v10.6.zip",
+        "https://github.com/bazelbuild/java_tools/releases/download/javac11_v10.6/java_tools_javac11_linux-v10.6.zip",
+    ],
 )
 
-load("@rules_jvm_external//:defs.bzl", jooq_codegen_maven_install = "maven_install")
-
-JOOQ_VERSION = "3.14.4"
-
-jooq_codegen_maven_install(
-    name = "jooq_codegen_maven",
-    artifacts = [
-        "org.jooq:jooq:%s" % JOOQ_VERSION,
-        "org.jooq:jooq-meta:%s" % JOOQ_VERSION,
-        "org.jooq:jooq-codegen:%s" % JOOQ_VERSION,
-        "mysql:mysql-connector-java:8.0.22",
-        "org.testcontainers:testcontainers:1.15.1",
-        "org.testcontainers:mysql:1.15.1",
-        "org.liquibase:liquibase-core:4.2.2",
+http_archive(
+    name = "remote_java_tools_windows",
+    sha256 = "873f1e53d1fa9c8e46b717673816cd822bb7acc474a194a18ff849fd8fa6ff00",
+    urls = [
+        "https://mirror.bazel.build/bazel_java_tools/releases/javac11/v10.6/java_tools_javac11_windows-v10.6.zip",
+        "https://github.com/bazelbuild/java_tools/releases/download/javac11_v10.6/java_tools_javac11_windows-v10.6.zip",
     ],
-    fetch_sources = True,
-    repositories = [
-        "https://repo1.maven.org/maven2",
+)
+
+http_archive(
+    name = "remote_java_tools_darwin",
+    sha256 = "d15b05d2061382748f779dc566537ea567a46bcba6fa34b56d7cb6e6d668adab",
+    urls = [
+        "https://mirror.bazel.build/bazel_java_tools/releases/javac11/v10.6/java_tools_javac11_darwin-v10.6.zip",
+        "https://github.com/bazelbuild/java_tools/releases/download/javac11_v10.6/java_tools_javac11_darwin-v10.6.zip",
     ],
 )
